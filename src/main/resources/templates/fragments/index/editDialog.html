@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="_obj-dialog" id="editDialog"
+     th:with="userRegex=${T(org.com.ljh.budong.regexes.UserRegex)}"
+     th:fragment="editDialog">
+    <h2 class="__title">회원정보수정</h2>
+    <div class="type-wrapper">
+        <label class="type">
+            <input checked name="type" value="password" type="radio">
+            <span class="title">비밀번호 변경</span>
+            <span class="message">비밀번호를 변경합니다</span>
+        </label>
+        <label class="type">
+            <input checked name="type" value="nickname" type="radio">
+            <span class="title">닉네임 변경</span>
+            <span class="message">닉네임을 변경합니다</span>
+        </label>
+    </div>
+    <form class="form nickname" rel="nicknameForm">
+        <label class="_obj-label" rel="nicknameLabel">
+            <span class="__text">닉네임</span>
+            <input required autocomplete="off" class="_obj-input __field" maxlength="10" minlength="2" name="nickname" placeholder="닉네임 (숫자, 영어 대소문자, 완성 한글 2자 이상 10자 이하)" spellcheck="false" type="text" th:attrappend="data-regex=${userRegex.nickname.expression}">
+        </label>
+        <button class="_obj-button" type="submit">닉네임 변경</button>
+    </form>
+    <form class="form password" rel="passwordForm">
+        <label class="_obj-label" rel="passwordLabel">
+            <span class="__text">비밀번호</span>
+            <input required autocomplete="new-password" class="_obj-input __field" maxlength="50" minlength="5" name="password" placeholder="신규 비밀번호 (숫자, 영어 대소문자, 특수기호 5자 이상 50자 이하)" spellcheck="false" type="password" th:attrappend="data-regex=${userRegex.password.expression}">
+            <input required autocomplete="off" class="_obj-input __field" maxlength="50" minlength="5" name="passwordCheck" placeholder="신규 비밀번호 재입력" spellcheck="false" type="password">
+        </label>
+        <button class="_obj-button" type="submit">비밀번호 변경</button>
+    </form>
+    <button class="_obj-button" name="cancelButton" rel="cancelButton" type="button">돌아가기</button>
+</div>
+</html>

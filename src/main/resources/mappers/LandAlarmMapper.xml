@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.com.ljh.budong.mappers.LandAlarmMapper">
+    <delete id="deleteLandAlarm">
+        DELETE
+        FROM `budong`.`land_alarms`
+        WHERE `land_alarm_pnu` = #{pnu}
+        AND BINARY `user_email` = #{userEmail}
+        LIMIT 1
+    </delete>
+
+    <insert id="insertLandAlarm" parameterType="org.com.ljh.budong.entities.LandAlarmEntity">
+        INSERT INTO `budong`.`land_alarms` (`land_alarm_pnu`, `user_email`, `created_at`)
+        VALUES (#{landAlarmPnu}, #{userEmail}, #{createdAt})
+    </insert>
+
+    <select id="selectLandAlarm" resultType="org.com.ljh.budong.entities.LandAlarmEntity">
+        SELECT `land_alarm_pnu`     AS `landAlarmPnu`,
+               `user_email`         AS `userEmail`,
+               `created_at`         AS `createdAt`
+        FROM `budong`.`land_alarms`
+        WHERE `land_alarm_pnu` = #{pnu}
+          AND BINARY `user_email` = #{userEmail}
+        LIMIT 1
+    </select>
+
+    <select id="selectLandAlarmByPnu" resultType="org.com.ljh.budong.entities.LandAlarmEntity">
+        SELECT `land_alarm_pnu`     AS `landAlarmPnu`,
+               `user_email`         AS `userEmail`,
+               `created_at`         AS `createdAt`
+        FROM `budong`.`land_alarms`
+        WHERE `land_alarm_pnu` = #{pnu}
+    </select>
+</mapper>

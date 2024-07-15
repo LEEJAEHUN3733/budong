@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<aside class="aside list" id="listAside"
+    th:fragment="listAside">
+    <h2 class="title">토지 목록</h2>
+    <ul class="lands">
+        <li class="empty">검색결과가 없습니다.<br><br>정확한 검색어를 다시 검색해 주세요.</li>
+        <li class="item">
+            <div class="info-container">
+                <span class="pnu">ㅇㅇㅇ</span>
+                <span class="title">경산시 옥산동 725-2</span>
+                <span class="subtitle">경상북도 경산시 경산로 44길 29</span>
+                <span class="building">신화평광아파트</span>
+                <ul class="menu">
+                    <li class="item view">
+                        <i class="icon fa-solid fa-star"></i>
+                        <span class="text">1,776</span>
+                    </li>
+                    <li class="item review">
+                        <i class="icon fa-solid fa-comments"></i>
+                        <span class="text">3,867</span>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    <div class="page-container">
+        <button class="_obj-button forward">
+            <i class="icon fa-solid fa-chevron-left"></i>
+        </button>
+        <a class="page" src="">1</a>
+        <a class="page" src="">1</a>
+        <a class="page selected" src="">1</a>
+        <a class="page" src="">1</a>
+        <a class="page" src="">1</a>
+        <button class="_obj-button backward">
+            <i class="icon fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+</aside>
+</html>

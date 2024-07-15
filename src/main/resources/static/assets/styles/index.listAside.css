@@ -1,0 +1,52 @@
+#listAside > .lands {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+#listAside > .lands > .empty {
+  border-bottom: 0.0625rem solid #eeeeee;
+  color: #757575;
+  padding: 2rem 0.5rem;
+  text-align: center;
+}
+#listAside > .lands > .item {
+  border-bottom: 0.0625rem solid #eeeeee;
+  cursor: pointer;
+  padding: 1rem 1.125rem;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+#listAside > .lands > .item > .info-container {
+  flex: 1;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  justify-content: flex-start;
+}
+#listAside > .lands > .item > .info-container > .title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+#listAside > .lands > .item > .info-container > .menu {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: flex-start;
+}
+#listAside > .lands > .item > .info-container > .menu > .item {
+  color: #757575;
+  font-size: 0.8rem;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  justify-content: center;
+}
+
+/*# sourceMappingURL=index.listAside.css.map */

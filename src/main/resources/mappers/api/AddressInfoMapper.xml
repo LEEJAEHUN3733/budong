@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.com.ljh.budong.mappers.api.AddressInfoMapper">
+    <select id="selectAddressInfo" resultType="org.com.ljh.budong.entities.api.AddressInfoEntity">
+        SELECT `pnu`                    AS `pnu`,
+               `address_name`           AS `addressName`,
+               `road_address_name`      AS `roadAddressName`,
+               `updated_at`             AS `updatedAt`
+        FROM `budong`.`address_info`
+        WHERE `pnu` = #{pnu}
+        LIMIT 1
+    </select>
+
+    <insert id="insertAddressInfo" parameterType="org.com.ljh.budong.entities.api.AddressInfoEntity">
+        INSERT INTO `budong`.`address_info` (`pnu`, `address_name`, `road_address_name`, `updated_at`)
+        VALUES (#{pnu}, #{addressName}, #{roadAddressName}, #{updatedAt})
+    </insert>
+
+    <update id="updateAddressInfo" parameterType="org.com.ljh.budong.entities.api.AddressInfoEntity">
+        UPDATE `budong`.`address_info`
+        SET `pnu`                    = #{pnu},
+            `address_name`           = #{addressName},
+            `road_address_name`      = #{roadAddressName},
+            `updated_at`             = #{updatedAt}
+        WHERE BINARY `pnu` = #{pnu}
+        LIMIT 1
+    </update>
+</mapper>

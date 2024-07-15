@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<nav id="nav"
+    th:fragment="nav">
+    <ul class="menu">
+        <li class="item">
+            <a href="#" class="link" rel="showHomeCaller">
+                <i class="icon fa-solid fa-house"></i>
+                <span class="text">홈으로</span>
+            </a>
+        </li>
+        <li class="item">
+            <a href="#" class="link" rel="showListAsideCaller">
+                <i class="icon fa-solid fa-list-ul"></i>
+                <span class="text">목록</span>
+            </a>
+        </li>
+        <li class="item">
+            <a href="#" class="link" rel="showMyPageAsideCaller">
+                <i class="icon fa-solid fa-star"></i>
+                <span class="text">My Page</span>
+            </a>
+        </li>
+    </ul>
+    <div class="spring"></div>
+    <ul class="menu">
+        <li class="item" th:if="${session.user == null}">
+            <a href="#" class="link" rel="showLoginCaller">
+                <i class="icon fa-solid fa-arrow-right-to-bracket"></i>
+                <span class="text">로그인</span>
+            </a>
+        </li>
+        <li class="item" th:if="${session.user != null}">
+            <a class="link" th:href="@{/user/logout}" onclick="showMyPageAside()">
+                <i class="icon fa-solid fa-arrow-right-to-bracket"></i>
+                <span class="text">로그아웃</span>
+            </a>
+        </li>
+        <li class="item">
+            <a href="#" class="link" rel="centerCaller">
+                <i class="icon fa-solid fa-headset"></i>
+                <span class="text">고객센터</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+</html>

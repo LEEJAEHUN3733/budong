@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<form novalidate class="_obj-dialog" id="withdrawalForm"
+      th:with="userRegex=${T(org.com.ljh.budong.regexes.UserRegex)}"
+      th:fragment="withdrawalForm">
+    <h2 class="__title">회원탈퇴</h2>
+    <label class="_obj-label" rel="passwordLabel">
+        <span class="__text">비밀번호</span>
+        <input required autocomplete="new-password" class="_obj-input __field" maxlength="50" minlength="5" name="password" placeholder="회원정보 확인을 위해 비밀번호를 입력해주세요" spellcheck="false" type="password" th:attrappend="data-regex=${userRegex.password.expression}">
+        <input required autocomplete="off" class="_obj-input __field" maxlength="50" minlength="5" name="passwordCheck" placeholder="비밀번호 재입력" spellcheck="false" type="password">
+    </label>
+    <label class="_obj-check-label" rel="checkLabel">
+        <input type="checkbox" name="agree">
+        <span class="__box"></span>
+        <span class="__text">
+            <a target="_blank" th:href="@{/assets/htmls/term-policy.html}">서비스 이용약관</a> 및 <a target="_blank" th:href="@{/assets/htmls/term-privacy.html}">개인정보 처리방침</a>에 의해 회원정보는 30일 뒤 서버에서 삭제됩니다.
+        </span>
+    </label>
+    <button class="_obj-button" type="submit">
+        <i class="__icon fa-solid fa-user-plus"></i>
+        <span class="__text">회원탈퇴</span>
+    </button>
+    <button class="_obj-button" rel="withdrawalCancel" type="button">
+        <i class="__icon fa-solid fa-xmark"></i>
+        <span class="__text">돌아가기</span>
+    </button>
+</form>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<header id="header" th:fragment="header">
+    <nav class="nav">
+        <ul class="menu">
+            <li class="item">
+                <a href="#" class="link">Budong</a>
+            </li>
+            <li class="spring"></li>
+            <li class="item">
+                <a href="#" class="link"  rel="showCenterCaller">고객센터</a>
+            </li>
+            <li class="item" th:if="${session.user == null}">
+                <a href="#" class="link sign-in" rel="showRegisterCaller">회원가입</a>
+            </li>
+            <li class="item" th:if="${session.user == null}">
+                <a href="#" class="link login" rel="showLoginCaller">로그인</a>
+            </li>
+            <li class="item" th:if="${session.user != null}">
+                <a th:href="@{user/mainLogout}" class="link logout">로그아웃</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.com.ljh.budong.mappers.api.BuildingPriceMapper">
+    <select id="selectBuildingPrice" resultType="org.com.ljh.budong.entities.api.BuildingPriceEntity">
+        SELECT `pnu`                              AS `pnu`,
+               `house_price`                      AS `housePrice`,
+               `house_price_standard_year`        AS `housePriceStandardYear`,
+               `house_price_standard_month`       AS `housePriceStandardMonth`,
+               `updated_at`                       AS `updatedAt`
+        FROM `budong`.`building_price`
+        WHERE `pnu` = #{pnu}
+        LIMIT 1
+    </select>
+
+    <insert id="insertBuildingPrice" parameterType="org.com.ljh.budong.entities.api.BuildingPriceEntity">
+        INSERT INTO `budong`.`building_price` (`pnu`, `house_price`, `house_price_standard_year`, `house_price_standard_month`, `updated_at`)
+        VALUES (#{pnu}, #{housePrice}, #{housePriceStandardYear}, #{housePriceStandardMonth}, #{updatedAt})
+    </insert>
+
+    <update id="updateBuildingPrice" parameterType="org.com.ljh.budong.entities.api.BuildingPriceEntity">
+        UPDATE `budong`.`building_price`
+        SET `pnu`                              = #{pnu},
+            `house_price`                      = #{housePrice},
+            `house_price_standard_year`        = #{housePriceStandardYear},
+            `house_price_standard_month`       = #{housePriceStandardMonth},
+            `updated_at`                       = #{updatedAt}
+        WHERE BINARY `pnu` = #{pnu}
+        LIMIT 1
+    </update>
+</mapper>

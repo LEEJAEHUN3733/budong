@@ -1,0 +1,128 @@
+@charset "UTF-8";
+
+#listAside {
+  > .lands {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    > .empty {
+      border-bottom: 0.0625rem solid #eeeeee;
+      color: #757575;
+      padding: 2rem 0.5rem;
+      text-align: center;
+    }
+
+    > .item {
+      border-bottom: 0.0625rem solid #eeeeee;
+      cursor: pointer;
+      padding: 1.075rem 1.125rem;
+
+      align-items: flex-start;
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      justify-content: flex-start;
+
+      &:hover {
+        background-color: darken(#ffffff, 10%);
+      }
+
+      &:active {
+        background-color: darken(#ffffff, 20%);
+      }
+
+      > .info-container {
+        flex: 1;
+
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        justify-content: flex-start;
+
+        > .pnu {
+          display: none;
+        }
+
+        > .title {
+          font-size: 1.125rem;
+          font-weight: 600;
+        }
+
+        > .menu {
+          align-items: stretch;
+          display: flex;
+          flex-direction: row;
+          gap: 0.5rem;
+          justify-content: flex-start;
+
+          > .item {
+            color: #757575;
+            font-size: 0.8rem;
+
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            gap: 0.25rem;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+
+  .page-container {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.5rem;
+
+    &.-visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    ._obj-button {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .page {
+      width: 2rem;
+      height: 2rem;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 1rem;
+      text-decoration: none;
+      color: inherit;
+
+      &:hover {
+        outline: #919191 solid 0.01rem;
+        background-color: #eeeeee;
+      }
+
+      &:active {
+        outline: #787878 solid 0.01rem;
+        background-color: #e0e0e0;
+      }
+
+      &.selected {
+        outline: #919191 solid 0.01rem;
+        background-color: #eeeeee;
+      }
+    }
+  }
+}

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.com.ljh.budong.mappers.LandReviewMapper">
+    <delete id="deleteLandReview">
+        DELETE
+        FROM `budong`.`land_reviews`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </delete>
+
+    <delete id="deleteLandReviewImage">
+        DELETE
+        FROM `budong`.`land_review_images`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </delete>
+
+    <insert id="insertLandReview"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="org.com.ljh.budong.entities.LandReviewEntity">
+        INSERT INTO `budong`.`land_reviews` (`land_review_pnu`, `user_email`, `rating`, `content`, `created_at`, `modified_at`)
+        VALUES (#{landReviewPnu}, #{userEmail}, #{rating}, #{content}, #{createdAt}, #{modifiedAt})
+    </insert>
+
+    <insert id="insertLandReviewImage"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="org.com.ljh.budong.entities.LandReviewImageEntity">
+        INSERT INTO `budong`.`land_review_images` (`land_review_index`, `data`, `name`, `content_type`)
+        VALUES (#{landReviewIndex}, #{data}, #{name}, #{contentType})
+    </insert>
+
+    <insert id="insertLandReviewReport" parameterType="org.com.ljh.budong.entities.LandReviewReportEntity">
+        INSERT INTO `budong`.`land_review_reports` (`land_review_index`, `user_email`, `created_at`)
+        VALUES (#{landReviewIndex}, #{userEmail}, #{createdAt})
+    </insert>
+
+    <select id="selectLandReviewCountByPnu"
+            resultType="_int">
+        SELECT COUNT(0) AS `reviewCount`
+        FROM `budong`.`land_reviews` AS `land_review`
+        WHERE BINARY `land_review`.`land_review_pnu` = #{pnu}
+    </select>
+
+    <select id="selectLandReview" resultType="org.com.ljh.budong.entities.LandReviewEntity">
+        SELECT `index`              AS `index`,
+               `land_review_pnu`    AS `landReviewPnu`,
+               `user_email`         AS `userEmail`,
+               `rating`             AS `rating`,
+               `content`            AS `content`,
+               `created_at`         AS `createdAt`,
+               `modified_at`        AS `modifiedAt`
+        FROM `budong`.`land_reviews`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
+
+    <select id="selectLandReviewByPnu" resultType="org.com.ljh.budong.entities.LandReviewEntity">
+        SELECT `index`                  AS `index`,
+               `land_review_pnu`        AS `landReviewPnu`,
+               `user_email`             AS `userEmail`,
+               `rating`                 AS `rating`,
+               `content`                AS `content`,
+               `created_at`             AS `createdAt`,
+               `modified_at`            AS `modifiedAt`
+        FROM `budong`.`land_reviews`
+        WHERE `land_review_pnu` = #{pnu}
+        ORDER BY `index` DESC
+    </select>
+
+    <select id="selectLandReviewByIndex" resultType="org.com.ljh.budong.dtos.LandReviewDto">
+        SELECT `index`              AS `index`,
+               `land_review_pnu`    AS `landReviewPnu`,
+               `user_email`         AS `userEmail`,
+               `rating`             AS `rating`,
+               `content`            AS `content`,
+               `created_at`         AS `createdAt`,
+               `modified_at`        AS `modifiedAt`,
+                (SELECT `user`.`nickname`
+                FROM `budong`.`users` AS `user`
+                WHERE `user`.`email` = `landReview`.`user_email`
+                LIMIT 1)            AS `userNickname`,
+                (SELECT `addressInfo`.`address_name`
+                FROM `budong`.`address_info` AS `addressInfo`
+                WHERE `addressInfo`.`pnu` = `landReview`.`land_review_pnu`
+                LIMIT 1)           AS `landAddress`
+                FROM `budong`.`land_reviews` AS `landReview`
+                WHERE `index` = #{index}
+                ORDER BY `index` DESC
+                LIMIT 1
+    </select>
+
+    <select id="selectLandReviewByPageDto"
+            resultType="org.com.ljh.budong.dtos.LandReviewDto"
+            parameterType="org.com.ljh.budong.dtos.ReviewPageDto">
+        SELECT `index`              AS `index`,
+               `land_review_pnu`    AS `landReviewPnu`,
+               `user_email`         AS `userEmail`,
+               `rating`             AS `rating`,
+               `content`            AS `content`,
+               `created_at`         AS `createdAt`,
+               `modified_at`        AS `modifiedAt`,
+               (SELECT `user`.`nickname`
+                FROM `budong`.`users` AS `user`
+                WHERE `user`.`email` = `landReview`.`user_email`
+                LIMIT 1)            AS `userNickname`,
+                (SELECT `addressInfo`.`address_name`
+                FROM `budong`.`address_info` AS `addressInfo`
+                WHERE `addressInfo`.`pnu` = `landReview`.`land_review_pnu`
+                LIMIT 1)           AS `landAddress`
+        FROM `budong`.`land_reviews` AS `landReview`
+        <where>
+            <if test="reviewPageDto.pnu != null">
+                `land_review_pnu` = #{reviewPageDto.pnu}
+            </if>
+            <if test="userEmail != null and reviewPageDto.pnu == null">
+                `user_email` = #{userEmail}
+            </if>
+        </where>
+        ORDER BY `index` DESC
+        LIMIT #{reviewPageDto.countPerPage} OFFSET #{reviewPageDto.offset}
+    </select>
+
+    <select id="selectLandReviewCountByPageDto"
+            resultType="_int"
+            parameterType="org.com.ljh.budong.dtos.ReviewPageDto">
+        SELECT COUNT(0)           AS `count`,
+               `index`              AS `index`,
+               `land_review_pnu`    AS `landReviewPnu`,
+               `user_email`         AS `userEmail`,
+               `rating`             AS `rating`,
+               `content`            AS `content`,
+               `created_at`         AS `createdAt`,
+               `modified_at`        AS `modifiedAt`,
+                (SELECT `user`.`nickname`
+                FROM `budong`.`users` AS `user`
+                WHERE `user`.`email` = `landReview`.`user_email`
+                LIMIT 1)            AS `userNickname`,
+                (SELECT `addressInfo`.`address_name`
+                FROM `budong`.`address_info` AS `addressInfo`
+                WHERE `addressInfo`.`pnu` = `landReview`.`land_review_pnu`
+                LIMIT 1)           AS `landAddress`
+                FROM `budong`.`land_reviews` AS `landReview`
+        <where>
+            <if test="reviewPageDto.pnu != null">
+                `land_review_pnu` = #{reviewPageDto.pnu}
+            </if>
+            <if test="userEmail != null and reviewPageDto.pnu == null">
+                `user_email` = #{userEmail}
+            </if>
+        </where>
+        ORDER BY `index` DESC
+        LIMIT #{reviewPageDto.countPerPage} OFFSET #{reviewPageDto.offset}
+    </select>
+
+    <select id="selectLandReviewByLandReviewIndex" resultType="org.com.ljh.budong.entities.LandReviewImageEntity">
+        SELECT `index`                  AS `index`,
+               `land_review_index`      AS `landReviewIndex`,
+               <if test="!excludeData">
+                   `data`                   AS `data`,
+               </if>
+               `name`                   AS `name`,
+               `content_type`           AS `contentType`
+        FROM `budong`.`land_review_images`
+        WHERE `land_review_index` = #{landReviewIndex}
+    </select>
+
+    <select id="selectLandReviewImage" resultType="org.com.ljh.budong.entities.LandReviewImageEntity">
+        SELECT `index`                  AS `index`,
+               `land_review_index`      AS `landReviewIndex`,
+               `data`                   AS `data`,
+               `name`                   AS `name`,
+               `content_type`           AS `contentType`
+        FROM `budong`.`land_review_images`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
+
+    <select id="selectLandReviewReport" resultType="org.com.ljh.budong.entities.LandReviewReportEntity">
+        SELECT `land_review_index`      AS `landReviewIndex`,
+               `user_email`             AS `userEmail`,
+               `created_at`             AS `createdAt`
+        FROM `budong`.`land_review_reports`
+        WHERE `land_review_index` = #{landReviewIndex}
+          AND BINARY `user_email` = #{userEmail}
+        LIMIT 1
+    </select>
+
+    <update id="updateLandReview" parameterType="org.com.ljh.budong.entities.LandReviewEntity">
+        UPDATE `budong`.`land_reviews`
+        SET `land_review_pnu`   = #{landReviewPnu},
+            `rating`            = #{rating},
+            `content`           = #{content},
+            `created_at`        = #{createdAt},
+            `modified_at`       = #{modifiedAt}
+        WHERE BINARY `index` = #{index}
+        LIMIT 1
+    </update>
+</mapper>

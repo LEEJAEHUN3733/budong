@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.com.ljh.budong.mappers.api.BuildingInfoMapper">
+    <select id="selectBuildingInfo" resultType="org.com.ljh.budong.entities.api.BuildingInfoEntity">
+        SELECT `pnu`                                  AS `pnu`,
+               `building_name`                        AS `buildingName`,
+               `site_area`                            AS `siteArea`,
+               `building_area`                        AS `buildingArea`,
+               `total_floor_area`                     AS `totalFloorArea`,
+               `floor_area_ratio`                     AS `floorAreaRatio`,
+               `building_to_land_ratio`               AS `buildingToLandRatio`,
+               `structure_name`                       AS `structureName`,
+               `building_main_purpose_name`           AS `buildingMainPurposeName`,
+               `detail_purpose_code`                  AS `detailPurposeCode`,
+               `detail_purpose_name`                  AS `detailPurposeName`,
+               `building_purpose_classification`      AS `buildingPurposeClassification`,
+               `building_height`                      AS `buildingHeight`,
+               `ground_floor`                         AS `groundFloor`,
+               `underground_floor`                    AS `undergroundFloor`,
+               `permit_date`                          AS `permitDate`,
+               `use_confirm_date`                     AS `useConfirmDate`,
+               `updated_at`                           AS `updatedAt`
+        FROM `budong`.`building_info`
+        WHERE `pnu` = #{pnu}
+        LIMIT 1
+    </select>
+
+    <insert id="insertBuildingInfo" parameterType="org.com.ljh.budong.entities.api.BuildingInfoEntity">
+        INSERT INTO `budong`.`building_info` (`pnu`, `building_name`, `site_area`, `building_area`, `total_floor_area`, `floor_area_ratio`, `building_to_land_ratio`, `structure_name`, `building_main_purpose_name`, `detail_purpose_code`, `detail_purpose_name`, `building_purpose_classification`, `building_height`, `ground_floor`, `underground_floor`, `permit_date`, `use_confirm_date`, `updated_at`)
+        VALUES (#{pnu}, #{buildingName}, #{siteArea}, #{buildingArea}, #{totalFloorArea}, #{floorAreaRatio}, #{buildingToLandRatio}, #{structureName}, #{buildingMainPurposeName}, #{detailPurposeCode}, #{detailPurposeName}, #{buildingPurposeClassification}, #{buildingHeight}, #{groundFloor}, #{undergroundFloor}, #{permitDate}, #{useConfirmDate}, #{updatedAt})
+    </insert>
+
+    <update id="updateBuildingInfo" parameterType="org.com.ljh.budong.entities.api.BuildingInfoEntity">
+        UPDATE `budong`.`building_info`
+        SET `pnu`                                  = #{pnu},
+            `building_name`                        = #{buildingName},
+            `site_area`                            = #{siteArea},
+            `building_area`                        = #{buildingArea},
+            `total_floor_area`                     = #{totalFloorArea},
+            `floor_area_ratio`                     = #{floorAreaRatio},
+            `building_to_land_ratio`               = #{buildingToLandRatio},
+            `structure_name`                       = #{structureName},
+            `building_main_purpose_name`           = #{buildingMainPurposeName},
+            `detail_purpose_code`                  = #{detailPurposeCode},
+            `detail_purpose_name`                  = #{detailPurposeName},
+            `building_purpose_classification`      = #{buildingPurposeClassification},
+            `building_height`                      = #{buildingHeight},
+            `ground_floor`                         = #{groundFloor},
+            `underground_floor`                    = #{undergroundFloor},
+            `permit_date`                          = #{permitDate},
+            `use_confirm_date`                     = #{useConfirmDate},
+            `updated_at`                           = #{updatedAt}
+        WHERE BINARY `pnu` = #{pnu}
+        LIMIT 1
+    </update>
+</mapper>

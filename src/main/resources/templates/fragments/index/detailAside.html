@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<aside class="aside list" id="detailAside"
+       th:fragment="detailAside">
+    <h2 class="title">
+        <i class="closer fa-solid fa-chevron-left" rel="closer"></i>
+        <span class="text">대지 상세정보</span>
+    </h2>
+    <div class="info-container">
+        <div class="name-container">
+            <span class="name" rel="addressName">ㅇㅇ</span>
+            <span class="road-address" rel="roadAddressName">ㅇㅇ</span>
+        </div>
+        <div class="stat-container">
+            <div class="item favorite">
+                <span class="text">저장 수</span>
+                <span class="value" rel="save">1,234</span>
+            </div>
+            <div class="item review">
+                <span class="text">리뷰</span>
+                <span class="value" rel="review">1,234</span>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="button save" rel="saveButton" type="button">
+                <i class="icon fa-solid fa-star"></i>
+                <span class="text">저장</span>
+            </button>
+            <button class="button alarm" rel="alarmButton" type="button">
+                <i class="icon fa-solid fa-bell"></i>
+                <span class="text">알림</span>
+            </button>
+            <button class="button" rel="reportButton" type="button">
+                <i class="icon fa-solid fa-circle-exclamation"></i>
+                <span class="text">신고</span>
+            </button>
+            <button class="button" rel="shareButton" type="button">
+                <i class="icon fa-solid fa-arrow-up-from-bracket"></i>
+                <span class="text">공유</span>
+            </button>
+        </div>
+    </div>
+    <div class="spec-container land">
+        <span class="title">토지 정보</span>
+        <div class="detail land-spec">
+            <span class="subtitle">지번</span>
+            <span class="spring"></span>
+            <span class="content" rel="landNumber">ㅇㅇ</span>
+        </div>
+        <div class="detail land-spec">
+            <span class="subtitle">지목</span>
+            <span class="spring"></span>
+            <span class="content" rel="landCategoryName">ㅇㅇ</span>
+        </div>
+        <div class="detail land-spec">
+            <span class="subtitle">면적</span>
+            <span class="spring"></span>
+            <span class="content" rel="landArea">ㅇㅇ</span>
+        </div>
+        <div class="detail land-spec">
+            <span class="subtitle">용도지역</span>
+            <span class="spring"></span>
+            <span class="content" rel="mainPurposeName">ㅇㅇ</span>
+        </div>
+        <div class="detail land-spec">
+            <span class="subtitle">이용상황</span>
+            <span class="spring"></span>
+            <span class="content" rel="landUseSituation">ㅇㅇ</span>
+        </div>
+        <div class="detail land-spec">
+            <span class="subtitle">고저</span>
+            <span class="spring"></span>
+            <span class="content" rel="terrainHeight">ㅇㅇ</span>
+        </div>
+        <div class="detail land-spec">
+            <span class="subtitle">지형형상</span>
+            <span class="spring"></span>
+            <span class="content" rel="terrainShape">ㅇㅇ</span>
+        </div>
+        <div class="detail land-spec">
+            <span class="subtitle">도로조건</span>
+            <span class="spring"></span>
+            <span class="content" rel="roadSide">ㅇㅇ</span>
+        </div>
+        <div class="detail land-spec">
+            <span class="subtitle">지역지구 등 지정여부</span>
+            <span class="spring"></span>
+            <span class="content" rel="subPurposeName">ㅇㅇ</span>
+        </div>
+    </div>
+    <div class="spec-container building">
+        <span class="title">건물 정보</span>
+        <div class="detail building-spec">
+            <span class="subtitle">건물명</span>
+            <span class="spring"></span>
+            <span class="content" rel="buildingName">ㅇㅇ</span>
+        </div>
+        <div class="detail building-spec">
+            <span class="subtitle">대지면적</span>
+            <span class="spring"></span>
+            <span class="content" rel="siteArea">ㅇㅇ</span>
+        </div>
+        <div class="detail building-spec">
+            <span class="subtitle">건축면적</span>
+            <span class="spring"></span>
+            <span class="content" rel="buildingArea">ㅇㅇ</span>
+        </div>
+        <div class="detail building-spec">
+            <span class="subtitle">연면적</span>
+            <span class="spring"></span>
+            <span class="content" rel="totalFloorArea">ㅇㅇ</span>
+        </div>
+        <div class="detail building-spec">
+            <span class="subtitle">용적률</span>
+            <span class="spring"></span>
+            <span class="content" rel="floorAreaRatio">ㅇㅇ</span>
+        </div>
+        <div class="detail building-spec">
+            <span class="subtitle">건폐율</span>
+            <span class="spring"></span>
+            <span class="content" rel="buildingToLandRatio">ㅇㅇ</span>
+        </div>
+        <div class="detail building-spec">
+            <span class="subtitle">구조</span>
+            <span class="spring"></span>
+            <span class="content" rel="structureName">ㅇㅇ</span>
+        </div>
+        <div class="detail building-spec">
+            <span class="subtitle">주용도</span>
+            <span class="spring"></span>
+            <span class="content" rel="buildingMainPurposeName">ㅇㅇ</span>
+        </div>
+        <div class="detail building-spec">
+            <span class="subtitle">기타용도</span>
+            <span class="spring"></span>
+            <span class="content" rel="detailPurposeName">ㅇㅇ</span>
+        </div>
+        <div class="detail building-spec">
+            <span class="subtitle">용도분류</span>
+            <span class="spring"></span>
+            <span class="content" rel="buildingPurposeClassification">ㅇㅇ</span>
+        </div>
+        <div class="detail building-spec">
+            <span class="subtitle">높이</span>
+            <span class="spring"></span>
+            <span class="content" rel="buildingHeight">ㅇㅇ</span>
+        </div>
+        <div class="detail building-spec">
+            <span class="subtitle">지상층수/지하층수</span>
+            <span class="spring"></span>
+            <span class="content" rel="floor">ㅇㅇ</span>
+        </div>
+        <div class="detail building-spec">
+            <span class="subtitle">허가일자</span>
+            <span class="spring"></span>
+            <span class="content" rel="permitDate">ㅇㅇ</span>
+        </div>
+        <div class="detail building-spec">
+            <span class="subtitle">사용승인일자</span>
+            <span class="spring"></span>
+            <span class="content" rel="useConfirmDate">ㅇㅇ</span>
+        </div>
+    </div>
+    <div class="spec-container own">
+        <span class="title">소유 정보</span>
+        <div class="detail owner-info">
+            <span class="subtitle">소유구분</span>
+            <span class="spring"></span>
+            <span class="content" rel="possession">ㅇㅇ</span>
+        </div>
+        <div class="detail owner-info">
+            <span class="subtitle">소유권변동일자</span>
+            <span class="spring"></span>
+            <span class="content" rel="ownershipChangeDate">ㅇㅇ</span>
+        </div>
+        <div class="detail owner-info">
+            <span class="subtitle">소유(공유)인수</span>
+            <span class="spring"></span>
+            <span class="content" rel="landShare">ㅇㅇ</span>
+        </div>
+    </div>
+    <div class="spec-container estate">
+        <span class="title">부동산 정보</span>
+        <div class="detail estate-info">
+            <span class="subtitle">개별공시지가</span>
+            <span class="spring"></span>
+            <span class="content" rel="govAssessedLandPrice">ㅇㅇ</span>
+        </div>
+        <div class="detail estate-info">
+            <span class="subtitle">기준일자</span>
+            <span class="spring"></span>
+            <span class="content" rel="landPriceStandardDate">ㅇㅇ</span>
+        </div>
+        <div class="detail estate-info">
+            <span class="subtitle">개별주택가격</span>
+            <span class="spring"></span>
+            <span class="content" rel="housePrice">ㅇㅇ</span>
+        </div>
+        <div class="detail estate-info">
+            <span class="subtitle">기준일자</span>
+            <span class="spring"></span>
+            <span class="content" rel="housePriceStandardDate">ㅇㅇ</span>
+        </div>
+    </div>
+    <div class="spec-container apart">
+    </div>
+    <form class="review-form" th:with="placeReviewRegex=${T(org.com.ljh.budong.regexes.LandReviewRegex)}">
+        <span class="not-signed" th:if="${session.user == null}">로그인 후 리뷰를 남길 수 있어요.</span>
+        <input hidden name="pnu" type="hidden">
+        <h2 class="title">리뷰 작성</h2>
+        <span class="_obj-label attachment">
+            <input hidden multiple accept="image/*" name="images" type="file" th:disabled="${session.user == null}">
+            <span class="__text">첨부 이미지</span>
+            <span class="image-container">
+                <span class="empty">이미지가 없습니다.</span>
+            </span>
+            <span class="button-container">
+                <button class="_obj-button" name="clearButton" type="button" th:disabled="${session.user == null}">전체 삭제</button>
+                <button class="_obj-button" name="deleteButton" type="button" th:disabled="${session.user == null}">선택 삭제</button>
+                <span class="spring"></span>
+                <button class="_obj-button" name="addButton" type="button" th:disabled="${session.user == null}">추가</button>
+            </span>
+        </span>
+        <label class="_obj-label rating">
+            <span class="__text">별점</span>
+            <select class="_obj-input" name="rating" th:disabled="${session.user == null}">
+                <option selected value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="1">⭐</option>
+            </select>
+        </label>
+        <label class="_obj-label content" rel="contentLabel">
+            <span class="__text __field">내용</span>
+            <textarea class="_obj-input __field" name="content" rows="5" th:attrappend="data-regex=${placeReviewRegex.content.expression}" th:disabled="${session.user == null}"></textarea>
+            <span class="__warning">올바른 내용을 입력해 주세요.</span>
+        </label>
+        <button class="_obj-button" type="submit" th:disabled="${session.user == null}">작성하기</button>
+    </form>
+    <form class="review-modify-form" th:with="placeReviewRegex=${T(org.com.ljh.budong.regexes.LandReviewRegex)}">
+        <input hidden name="index" rel="index" type="hidden">
+        <input hidden name="pnu" rel="pnu" type="hidden">
+        <h2 class="title">리뷰 수정</h2>
+        <span class="_obj-label attachment">
+            <input hidden multiple accept="image/*" name="images" type="file" th:disabled="${session.user == null}">
+            <span class="__text">첨부 이미지</span>
+            <span class="image-container" rel="imageContainer">
+                <span class="empty">이미지가 없습니다.</span>
+            </span>
+            <span class="button-container">
+                <button class="_obj-button" name="clearButton" type="button" th:disabled="${session.user == null}">전체 삭제</button>
+                <button class="_obj-button" name="deleteButton" type="button" th:disabled="${session.user == null}">선택 삭제</button>
+                <span class="spring"></span>
+                <button class="_obj-button" name="addButton" type="button" th:disabled="${session.user == null}">추가</button>
+            </span>
+        </span>
+        <label class="_obj-label rating">
+            <span class="__text">별점</span>
+            <select class="_obj-input" name="rating" rel="rating" th:disabled="${session.user == null}">
+                <option selected value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="1">⭐</option>
+            </select>
+        </label>
+        <label class="_obj-label content" rel="contentLabel">
+            <span class="__text __field">내용</span>
+            <textarea class="_obj-input __field" name="content" rel="content" rows="5" th:attrappend="data-regex=${placeReviewRegex.content.expression}" th:disabled="${session.user == null}"></textarea>
+            <span class="__warning">올바른 내용을 입력해 주세요.</span>
+        </label>
+        <button class="_obj-button" type="submit" th:disabled="${session.user == null}">수정하기</button>
+        <span class="button-container">
+            <button class="_obj-button" type="button" rel="cancelButton" th:disabled="${session.user == null}">취소</button>
+        </span>
+    </form>
+    <div class="detail-review-container">
+        <span class="title">대지 리뷰</span>
+        <ul class="review-container">
+            <li class="item">
+            <span class="head">
+                <span class="left">
+                    <span class="index" data-index="8"></span>
+                    <span class="nickname">샘플닉네임</span>
+                    <span class="rating">
+                        <i class="star fa-solid fa-star"></i>
+                        <i class="star fa-solid fa-star"></i>
+                        <i class="star fa-solid fa-star"></i>
+                        <i class="star fa-solid fa-star"></i>
+                        <i class="star fa-regular fa-star"></i>
+                    </span>
+                </span>
+                <span class="right date">2024-05-13 09:29:30</span>
+            </span>
+                <span class="body">
+                <span class="image-container" data-flickity>
+                    <img alt="" class="image" src="https://images.khan.co.kr/article/2023/12/16/news-p.v1.20231216.a2d1d41864f244d2a170da30762a06ac_P1.jpg">
+                    <img alt="" class="image" src="https://images.khan.co.kr/article/2023/12/16/news-p.v1.20231216.a2d1d41864f244d2a170da30762a06ac_P1.jpg">
+                    <img alt="" class="image" src="https://images.khan.co.kr/article/2023/12/16/news-p.v1.20231216.a2d1d41864f244d2a170da30762a06ac_P1.jpg">
+                    <img alt="" class="image" src="https://images.khan.co.kr/article/2023/12/16/news-p.v1.20231216.a2d1d41864f244d2a170da30762a06ac_P1.jpg">
+                    <img alt="" class="image" src="https://images.khan.co.kr/article/2023/12/16/news-p.v1.20231216.a2d1d41864f244d2a170da30762a06ac_P1.jpg">
+                </span>
+                <span class="content">
+                    내용내용내용내용내용내용내용내용내용
+                </span>
+            </span>
+                <span class="foot">
+                <a href="#" class="link" rel="deleteLink">삭제</a>
+                <a href="#" class="link" rel="reportLink">신고</a>
+            </span>
+            </li>
+        </ul>
+        <div class="review-page-container">
+            <button class="_obj-button forward">
+                <i class="icon fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="_obj-button forward">
+                <i class="icon fa-solid fa-chevron-left"></i>
+            </button>
+            <a class="page" src="">1</a>
+            <a class="page selected" src="">1</a>
+            <a class="page" src="">1</a>
+            <button class="_obj-button backward">
+                <i class="icon fa-solid fa-chevron-right"></i>
+            </button>
+            <button class="_obj-button backward">
+                <i class="icon fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+    <div class="to-top" rel="detailAsideTop">
+        <span class="text">맨 위로</span>
+    </div>
+</aside>
+</html>

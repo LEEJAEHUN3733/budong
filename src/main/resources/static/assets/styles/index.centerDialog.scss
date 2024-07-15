@@ -1,0 +1,20 @@
+#centerDialog {
+  >.content-label {
+    .content {
+      resize: none;
+      height: 15rem;
+    }
+  }
+
+  > .button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+
+    > ._obj-button {
+      width: 30%
+    }
+  }
+}

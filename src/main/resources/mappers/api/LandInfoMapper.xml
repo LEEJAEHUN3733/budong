@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.com.ljh.budong.mappers.api.LandInfoMapper">
+    <select id="selectLandInfo" resultType="org.com.ljh.budong.entities.api.LandInfoEntity">
+        SELECT `pnu`                      AS `pnu`,
+               `land_main_number`         AS `landMainNumber`,
+               `land_sub_number`          AS `landSubNumber`,
+               `land_category_name`       AS `landCategoryName`,
+               `land_area`                AS `landArea`,
+               `main_purpose_name`        AS `mainPurposeName`,
+               `sub_purpose_name`         AS `subPurposeName`,
+               `land_use_situation`       AS `landUseSituation`,
+               `terrain_height`           AS `terrainHeight`,
+               `terrain_shape`            AS `terrainShape`,
+               `road_side`                AS `roadSide`,
+               `updated_at`               AS `updatedAt`
+        FROM `budong`.`land_info`
+        WHERE BINARY `pnu` = #{pnu}
+        LIMIT 1
+    </select>
+
+    <insert id="insertLandInfo" parameterType="org.com.ljh.budong.entities.api.LandInfoEntity">
+        INSERT INTO `budong`.`land_info` (`pnu`, `land_main_number`, `land_sub_number`, `land_category_name`, `land_area`, `main_purpose_name`, `sub_purpose_name`, `land_use_situation`, `terrain_height`, `terrain_shape`, `road_side`, `updated_at`)
+        VALUES (#{pnu}, #{landMainNumber}, #{landSubNumber}, #{landCategoryName}, #{landArea}, #{mainPurposeName}, #{subPurposeName}, #{landUseSituation}, #{terrainHeight}, #{terrainShape}, #{roadSide}, #{updatedAt})
+    </insert>
+
+    <update id="updateLandInfo" parameterType="org.com.ljh.budong.entities.api.LandInfoEntity">
+        UPDATE `budong`.`land_info`
+        SET `pnu`                   = #{pnu},
+            `land_main_number`      = #{landMainNumber},
+            `land_sub_number`       = #{landSubNumber},
+            `land_category_name`    = #{landCategoryName},
+            `land_area`             = #{landArea},
+            `main_purpose_name`     = #{mainPurposeName},
+            `sub_purpose_name`      = #{subPurposeName},
+            `land_use_situation`    = #{landUseSituation},
+            `terrain_height`        = #{terrainHeight},
+            `terrain_shape`         = #{terrainShape},
+            `road_side`             = #{roadSide},
+            `updated_at`            = #{updatedAt}
+        WHERE BINARY `pnu` = #{pnu}
+        LIMIT 1
+    </update>
+</mapper>

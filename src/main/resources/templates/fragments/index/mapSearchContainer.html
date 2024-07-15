@@ -1,0 +1,16 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div id="mapSearchContainer" th:fragment="mapSearchContainer">
+    <div class="item-container" id="itemContainer">
+        <i class="icon fa-solid fa-magnifying-glass" rel="opener" aria-hidden="true"></i>
+        <i class="icon fa-solid fa-chevron-left -visible" rel="closer" aria-hidden="true"></i>
+    </div>
+    <form id="addressSearchForm" class="-visible">
+        <label class="input-container">
+            <input autofocus required class="search" minlength="1" maxlength="50" name="keyword" type="text" placeholder="주소, 건물이름 검색">
+        </label>
+        <button class="search-button" type="submit" name="search">
+            <i class="icon fa-solid fa-magnifying-glass"></i>
+        </button>
+    </form>
+</div>
+</html>

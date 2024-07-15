@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.com.ljh.budong.mappers.api.LandCoordinateMapper">
+    <select id="selectLandCoordinate" resultType="org.com.ljh.budong.entities.api.LandCoordinateEntity">
+        SELECT `pnu`            AS `pnu`,
+               `latitude`       AS `latitude`,
+               `longitude`      AS `longitude`
+        FROM `budong`.`land_coordinate`
+        WHERE `pnu` = #{pnu}
+        LIMIT 1
+    </select>
+
+    <insert id="insertLandCoordinate" parameterType="org.com.ljh.budong.entities.api.LandCoordinateEntity">
+        INSERT INTO `budong`.`land_coordinate` (`pnu`, `latitude`, `longitude`)
+        VALUES (#{pnu}, #{latitude}, #{longitude})
+    </insert>
+
+    <update id="updateLandCoordinate" parameterType="org.com.ljh.budong.entities.api.LandCoordinateEntity">
+        UPDATE `budong`.`land_coordinate`
+        SET `pnu`           = #{pnu},
+            `latitude`      = #{latitude},
+            `longitude`     = #{longitude}
+        WHERE BINARY `pnu` = #{pnu}
+        LIMIT 1
+    </update>
+</mapper>

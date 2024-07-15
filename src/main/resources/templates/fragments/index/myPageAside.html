@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<aside class="aside list" id="myPageAside"
+       th:fragment="myPageAside">
+    <h2 class="title">
+        <span class="text">마이 페이지</span>
+    </h2>
+    <span class="not-signed" th:if="${session.user == null}">로그인 후 마이페이지를 사용해 보세요.</span>
+    <form class="image-form">
+        <label class="_obj-label thumbnail" rel="thumbnailLabel">
+            <input hidden accept="image/*" name="thumbnail" type="file">
+            <span class="image-wrapper">
+                <span class="empty">프로필 이미지를 선택해 주세요.</span>
+                <img src="" alt="" class="image">
+            </span>
+        </label>
+        <div class="button-container">
+            <button class="_obj-button" rel="cancelButton" type="button">취소</button>
+            <button class="_obj-button" type="submit">변경</button>
+        </div>
+    </form>
+    <div class="info-container" rel="myInfoContainer">
+        <div class="image-wrapper">
+            <img alt="" class="thumbnail" rel="profileImage" src="">
+        </div>
+        <div class="detail-info-container">
+            <span class="nickname" rel="nickname">ㅇㅇ</span>
+            <span class="grade" rel="grade">ㅇㅇ</span>
+        </div>
+    </div>
+    <div class="button-container" rel="myPageButtonContainer">
+        <div class="horizontal">
+            <button class="_obj-button" rel="editProfile" type="button">
+                <i class="__icon fa-solid fa-pen-to-square"></i>
+                <span class="__text">정보수정</span>
+            </button>
+            <button class="_obj-button" rel="withdrawal" type="button">
+                <i class="__icon fa-solid fa-person-walking-arrow-right"></i>
+                <span class="__text">회원탈퇴</span>
+            </button>
+        </div>
+        <button class="_back-button" type="button">
+            <i class="__icon fa-solid fa-arrow-right-from-bracket"></i>
+            <span class="__text">나가기</span>
+        </button>
+    </div>
+    <div class="land-container" rel="myLandContainer">
+        <span class="title">내가 저장한 토지</span>
+        <ul class="lands">
+            <li class="empty">저장한 토지가 없습니다.<br><br>관심있는 토지를 저장해 주세요.</li>
+            <li class="item">
+                <div class="my-land-container">
+                    <span class="pnu"></span>
+                    <span class="title">ㅇㅇ</span>
+                    <span class="subtitle">ㅇㅇ</span>
+                    <span class="building">ㅇㅇ</span>
+                </div>
+            </li>
+        </ul>
+        <div class="land-page-container">
+            <button class="_obj-button forward">
+                <i class="icon fa-solid fa-chevron-left"></i>
+            </button>
+            <a class="page" src="">1</a>
+            <a class="page selected" src="">1</a>
+            <a class="page" src="">1</a>
+            <button class="_obj-button backward">
+                <i class="icon fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+    <div class="review-container" rel="myReviewContainer">
+        <span class="title">내가 쓴 리뷰</span>
+        <ul class="review-container">
+            <li class="item">
+            <span class="head">
+                <span class="left">
+                    <span class="land-name">ㅇㅇ</span>
+                    <span class="rating">
+                        <i class="star fa-solid fa-star"></i>
+                        <i class="star fa-solid fa-star"></i>
+                        <i class="star fa-solid fa-star"></i>
+                        <i class="star fa-solid fa-star"></i>
+                        <i class="star fa-regular fa-star"></i>
+                    </span>
+                </span>
+                <span class="right date">2024-05-13 09:29:30</span>
+            </span>
+                <span class="body">
+                <span class="image-container" data-flickity>
+                    <img alt="" class="image" src="">
+                    <img alt="" class="image" src="">
+                    <img alt="" class="image" src="">
+                    <img alt="" class="image" src="">
+                    <img alt="" class="image" src="">
+                </span>
+                <span class="content">
+                    내용내용내용내용내용내용내용내용내용
+                </span>
+            </span>
+                <span class="foot">
+                <a href="#" class="link" rel="modifyLink">수정</a>
+                <a href="#" class="link" rel="deleteLink">삭제</a>
+            </span>
+            </li>
+        </ul>
+        <div class="review-page-container">
+            <button class="_obj-button forward">
+                <i class="icon fa-solid fa-chevron-left"></i>
+            </button>
+            <a class="page" src="">1</a>
+            <a class="page selected" src="">1</a>
+            <a class="page" src="">1</a>
+            <button class="_obj-button backward">
+                <i class="icon fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+    <div class="to-top" rel="myPageTop">
+        <span class="text">맨 위로</span>
+    </div>
+</aside>
+</html>

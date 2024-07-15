@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.com.ljh.budong.mappers.api.LandPriceMapper">
+    <select id="selectLandPrice" resultType="org.com.ljh.budong.entities.api.LandPriceEntity">
+        SELECT `pnu`                          AS `pnu`,
+               `gov_assessed_land_price`      AS `govAssessedLandPrice`,
+               `land_price_standard_year`     AS `landPriceStandardYear`,
+               `land_price_standard_month`    AS `landPriceStandardMonth`,
+               `updated_at`                   AS `updatedAt`
+        FROM `budong`.`land_price`
+        WHERE `pnu` = #{pnu}
+        LIMIT 1
+    </select>
+
+    <insert id="insertLandPrice" parameterType="org.com.ljh.budong.entities.api.LandPriceEntity">
+        INSERT INTO `budong`.`land_price` (`pnu`, `gov_assessed_land_price`, `land_price_standard_year`, `land_price_standard_month`, `updated_at`)
+        VALUES (#{pnu}, #{govAssessedLandPrice}, #{landPriceStandardYear}, #{landPriceStandardMonth}, #{updatedAt})
+    </insert>
+
+    <update id="updateLandPrice" parameterType="org.com.ljh.budong.entities.api.LandPriceEntity">
+        UPDATE `budong`.`land_price`
+        SET `pnu`                          = #{pnu},
+            `gov_assessed_land_price`      = #{govAssessedLandPrice},
+            `land_price_standard_year`     = #{landPriceStandardYear},
+            `land_price_standard_month`    = #{landPriceStandardMonth},
+            `updated_at`                   = #{updatedAt}
+        WHERE BINARY `pnu` = #{pnu}
+        LIMIT 1
+    </update>
+</mapper>

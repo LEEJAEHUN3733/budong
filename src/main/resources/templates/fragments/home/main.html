@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<main id="main" th:fragment="main">
+    <form th:action="@{./home}" class="search-form">
+        <label class="input-container">
+            <select name="by" class="select">
+                <option class="option" value="address">지번주소</option>
+                <option class="option" value="roadAddress">도로명주소</option>
+                <option class="option" value="building">건물명</option>
+            </select>
+            <input autofocus class="search" maxlength="50" name="keyword" type="text" placeholder="카테고리에 맞는 검색어를 입력해주세요">
+            <button class="search-button" type="submit" name="search">
+                <i class="icon fa-solid fa-magnifying-glass"></i>
+            </button>
+        </label>
+    </form>
+    <a class="map-link" th:href="@{./home}">
+        <i class="icon fa-solid fa-map"></i>
+    </a>
+</main>
+</html>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.com.ljh.budong.mappers.SearchMapper">
+    <select id="selectAddressBySearch"
+            parameterType="org.com.ljh.budong.dtos.SearchDto"
+            resultType="org.com.ljh.budong.dtos.AddressDto">
+        SELECT `pnu`                    AS `pnu`,
+               `address_name`           AS `addressName`,
+               `road_address_name`      AS `roadAddressName`,
+               `updated_at`             AS `updatedAt`,
+               (SELECT `building_info`.`building_name`
+                FROM `budong`.`building_info`    AS `building_info`
+                WHERE `building_info`.`pnu` = `address_info`.`pnu`
+                LIMIT 1)                AS `buildingName`
+        FROM `budong`.`address_info`    AS `address_info`
+        <if test="by == null or by.equals('all')">
+            WHERE REPLACE(`address_name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+            OR REPLACE(`road_address_name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+            OR (
+                SELECT REPLACE(`building_info`.`building_name`, ' ', '')
+                FROM `budong`.`building_info` AS `building_info`
+                WHERE `building_info`.`pnu` = `address_info`.`pnu`
+                ) LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+        </if>
+        <if test="by != null and by.equals('building')">
+            WHERE (
+            SELECT REPLACE(`building_info`.`building_name`, ' ', '')
+            FROM `budong`.`building_info` AS `building_info`
+            WHERE `building_info`.`pnu` = `address_info`.`pnu`
+            ) LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+        </if>
+        <if test="by != null and by.equals('address')">
+            WHERE REPLACE(`address_name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+        </if>
+        <if test="by != null and by.equals('roadAddress')">
+            WHERE REPLACE(`road_address_name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+        </if>
+        ORDER BY `address_name` DESC
+        LIMIT #{countPerPage} OFFSET #{offset}
+    </select>
+
+    <select id="selectAddressCountBySearch"
+            parameterType="org.com.ljh.budong.dtos.SearchDto"
+            resultType="_int">
+        SELECT COUNT(0)     AS `count`,
+               `pnu`                    AS `pnu`,
+               `address_name`           AS `addressName`,
+               `road_address_name`      AS `roadAddressName`,
+               `updated_at`             AS `updatedAt`,
+               (SELECT `building_info`.`building_name`
+                FROM `budong`.`building_info`    AS `building_info`
+                WHERE `building_info`.`pnu` = `address_info`.`pnu`
+                LIMIT 1)                AS `buildingName`
+        FROM `budong`.`address_info`    AS `address_info`
+        <if test="by == null or by.equals('all')">
+            WHERE REPLACE(`address_name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+            OR REPLACE(`road_address_name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+            OR (
+            SELECT REPLACE(`building_info`.`building_name`, ' ', '')
+            FROM `budong`.`building_info` AS `building_info`
+            WHERE `building_info`.`pnu` = `address_info`.`pnu`
+            ) LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+        </if>
+        <if test="by != null and by.equals('building')">
+            WHERE (
+            SELECT REPLACE(`building_info`.`building_name`, ' ', '')
+            FROM `budong`.`building_info` AS `building_info`
+            WHERE `building_info`.`pnu` = `address_info`.`pnu`
+            ) LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+        </if>
+        <if test="by != null and by.equals('address')">
+            WHERE REPLACE(`address_name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+        </if>
+        <if test="by != null and by.equals('roadAddress')">
+            WHERE REPLACE(`road_address_name`, ' ', '') LIKE CONCAT('%', REPLACE(#{keyword}, ' ', ''), '%')
+        </if>
+        ORDER BY `address_name` DESC
+        LIMIT #{countPerPage} OFFSET #{offset}
+    </select>
+</mapper>
+

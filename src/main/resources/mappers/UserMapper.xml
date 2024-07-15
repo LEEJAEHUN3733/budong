@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.com.ljh.budong.mappers.UserMapper">
+    <insert id="insertUser"
+            parameterType="org.com.ljh.budong.entities.UserEntity">
+        INSERT INTO `budong`.`users` (`email`, `password`, `nickname`, `created_at`, `updated_at`,`is_admin`, `is_deleted`, `is_suspended`)
+        VALUES (#{email}, #{password}, #{nickname}, #{createdAt}, #{updatedAt}, #{isAdmin}, #{isDeleted}, #{isSuspended})
+    </insert>
+
+    <insert id="insertEmailAuth" parameterType="org.com.ljh.budong.entities.EmailAuthEntity">
+        INSERT INTO `budong`.`email_auths` (`email`, `code`, `salt`, `created_at`, `expires_at`, `is_expired`, `is_verified`, `is_used`)
+        VALUES (#{email}, #{code}, #{salt}, #{createdAt}, #{expiresAt}, #{isExpired}, #{isVerified}, #{isUsed})
+    </insert>
+
+    <insert id="insertUserProfileImage"
+            useGeneratedKeys="true"
+            keyProperty="index"
+            keyColumn="index"
+            parameterType="org.com.ljh.budong.entities.UserProfileImageEntity">
+        INSERT INTO `budong`.`user_profile_images` (`user_email`, `data`, `name`, `content_type`)
+        VALUES (#{userEmail}, #{data}, #{name}, #{contentType})
+    </insert>
+
+    <select id="selectUserProfileByIndex" resultType="org.com.ljh.budong.entities.UserProfileImageEntity">
+        SELECT `index`              AS `index`,
+               `user_email`         AS `userEmail`,
+               `data`               AS `data`,
+               `name`               AS `name`,
+               `content_type`       AS `contentType`
+        FROM `budong`.`user_profile_images`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
+
+    <select id="selectUserProfileByUserEmail" resultType="org.com.ljh.budong.entities.UserProfileImageEntity">
+        SELECT `index`              AS `index`,
+               `user_email`         AS `userEmail`,
+               `data`               AS `data`,
+               `name`               AS `name`,
+               `content_type`       AS `contentType`
+        FROM `budong`.`user_profile_images`
+        WHERE `user_email` = #{userEmail}
+        LIMIT 1
+    </select>
+
+    <select id="selectEmailAuthByEmailCodeSalt" resultType="org.com.ljh.budong.entities.EmailAuthEntity">
+        SELECT `email`            AS `email`,
+               `code`             AS `code`,
+               `salt`             AS `salt`,
+               `created_at`       AS `createdAt`,
+               `expires_at`       AS `expiresAt`,
+               `is_expired`       AS `isExpired`,
+               `is_verified`      AS `isVerified`,
+               `is_used`          AS `isUsed`
+        FROM `budong`.`email_auths`
+        WHERE BINARY `email` = #{email}
+          AND BINARY `code`  = #{code}
+          AND BINARY `salt`  = #{salt}
+        LIMIT 1
+    </select>
+
+    <select id="selectUserByEmail" resultType="org.com.ljh.budong.entities.UserEntity">
+        SELECT `email`          AS `email`,
+               `password`       AS `password`,
+               `nickname`       AS `nickname`,
+               `created_at`     AS `createdAt`,
+               `updated_at`     AS `updatedAt`,
+               `is_admin`       AS `isAdmin`,
+               `is_deleted`     AS `isDeleted`,
+               `is_suspended`   AS `isSuspended`
+        FROM `budong`.`users`
+        WHERE BINARY `email` = #{email}
+        LIMIT 1
+    </select>
+
+    <select id="selectEmailAuthByNickName" resultType="org.com.ljh.budong.entities.UserEntity">
+        SELECT `email`          AS `email`,
+               `password`       AS `password`,
+               `nickname`       AS `nickname`,
+               `created_at`     AS `createdAt`,
+               `updated_at`     AS `updatedAt`,
+               `is_admin`       AS `isAdmin`,
+               `is_deleted`     AS `isDeleted`,
+               `is_suspended`   AS `isSuspended`
+        FROM `budong`.`users`
+        WHERE BINARY `nickname` = #{nickname}
+        LIMIT 1
+    </select>
+
+    <update id="updateEmailAuth" parameterType="org.com.ljh.budong.entities.EmailAuthEntity">
+        UPDATE `budong`.`email_auths`
+        SET `created_at`    = #{createdAt},
+            `expires_at`    = #{expiresAt},
+            `is_expired`    = #{isExpired},
+            `is_verified`   = #{isVerified},
+            `is_used`       = #{isUsed}
+        WHERE BINARY `email` = #{email}
+          AND BINARY `code`  = #{code}
+          AND BINARY `salt`  = #{salt}
+        LIMIT 1
+    </update>
+
+    <update id="updateUser" parameterType="org.com.ljh.budong.entities.UserEntity">
+        UPDATE `budong`.`users`
+        SET `email`          = #{email},
+            `password`       = #{password},
+            `nickname`       = #{nickname},
+            `created_at`     = #{createdAt},
+            `updated_at`     = #{updatedAt},
+            `is_admin`       = #{isAdmin},
+            `is_deleted`     = #{isDeleted},
+            `is_suspended`   = #{isSuspended}
+        WHERE BINARY `email` = #{email}
+        LIMIT 1
+    </update>
+
+    <update id="updateUserProfileImage" parameterType="org.com.ljh.budong.entities.UserProfileImageEntity">
+        UPDATE `budong`.`user_profile_images`
+        SET `index`         = #{index},
+            `user_email`    = #{userEmail},
+            `data`          = #{data},
+            `name`          = #{name},
+            `content_type`  = #{contentType}
+        WHERE BINARY `user_email` = #{userEmail}
+        LIMIT 1
+    </update>
+
+    <select id="selectUserByDeleted" resultType="org.com.ljh.budong.entities.UserEntity">
+        SELECT `email`          AS `email`,
+               `password`       AS `password`,
+               `nickname`       AS `nickname`,
+               `created_at`     AS `createdAt`,
+               `updated_at`     AS `updatedAt`,
+               `is_admin`       AS `isAdmin`,
+               `is_deleted`     AS `isDeleted`,
+               `is_suspended`   AS `isSuspended`
+        FROM `budong`.`users`
+        WHERE BINARY `is_deleted` = #{deleted}
+        AND `updated_at` &lt; #{updatedAt}
+    </select>
+
+    <delete id="deleteUser" parameterType="org.com.ljh.budong.entities.UserEntity">
+        DELETE
+        FROM `budong`.`users`
+        WHERE `email` = #{email}
+        LIMIT 1
+    </delete>
+</mapper>

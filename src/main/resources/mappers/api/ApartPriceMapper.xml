@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.com.ljh.budong.mappers.api.ApartPriceMapper">
+    <select id="selectApartPrice" resultType="org.com.ljh.budong.entities.api.ApartPriceEntity">
+        SELECT `pnu`                    AS `pnu`,
+               `apart_price_info`       AS `apartPriceInfo`,
+               `updated_at`             AS `updatedAt`
+        FROM `budong`.`apart_price`
+        WHERE `pnu` = #{pnu}
+        LIMIT 1
+    </select>
+
+    <insert id="insertApartPrice" parameterType="org.com.ljh.budong.entities.api.ApartPriceEntity">
+        INSERT INTO `budong`.`apart_price` (`pnu`, `apart_price_info`, `updated_at`)
+        VALUES (#{pnu}, #{apartPriceInfo}, #{updatedAt})
+    </insert>
+
+    <update id="updateApartPrice" parameterType="org.com.ljh.budong.entities.api.ApartPriceEntity">
+        UPDATE `budong`.`apart_price`
+        SET `pnu`               = #{pnu},
+            `apart_price_info`  = #{apartPriceInfo},
+            `updated_at`        = #{updatedAt}
+        WHERE BINARY `pnu` = #{pnu}
+        LIMIT 1
+    </update>
+</mapper>

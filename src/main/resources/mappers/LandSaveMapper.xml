@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.com.ljh.budong.mappers.LandSaveMapper">
+    <delete id="deleteLandSave">
+        DELETE
+        FROM `budong`.`land_saves`
+        WHERE `land_save_pnu` = #{pnu}
+        AND BINARY `user_email` = #{userEmail}
+        LIMIT 1
+    </delete>
+
+    <insert id="insertLandSave" parameterType="org.com.ljh.budong.entities.LandSaveEntity">
+        INSERT INTO `budong`.`land_saves` (`land_save_pnu`, `user_email`, `created_at`)
+        VALUES (#{landSavePnu}, #{userEmail}, #{createdAt})
+    </insert>
+
+    <select id="selectLandSaveCountByPnu"
+            resultType="_int">
+        SELECT COUNT(0) AS `saveCount`
+        FROM `budong`.`land_saves` AS `land_save`
+        WHERE BINARY `land_save`.`land_save_pnu` = #{pnu}
+    </select>
+
+    <select id="selectLandSave" resultType="org.com.ljh.budong.entities.LandSaveEntity">
+        SELECT `land_save_pnu`  AS `landSavePnu`,
+               `user_email`     AS `userEmail`,
+               `created_at`     AS `created_at`
+        FROM `budong`.`land_saves`
+        WHERE `land_save_pnu` = #{pnu}
+          AND BINARY `user_email` = #{userEmail}
+        LIMIT 1
+    </select>
+
+    <select id="selectLandSaveByPage"
+            resultType="org.com.ljh.budong.dtos.LandSaveDto"
+            parameterType="org.com.ljh.budong.dtos.LandDto">
+        SELECT `land_save_pnu`      AS `landSavePnu`,
+               `user_email`         AS `userEmail`,
+               `created_at`         AS `createdAt`,
+               (SELECT `address_info`.`address_name`
+                FROM `budong`.`address_info` AS `address_info`
+                WHERE `address_info`.`pnu` = `land_save`.`land_save_pnu`
+                LIMIT 1)            AS `landAddressName`,
+               (SELECT `address_info`.`road_address_name`
+                FROM `budong`.`address_info` AS `address_info`
+                WHERE `address_info`.`pnu` = `land_save`.`land_save_pnu`
+                LIMIT 1)            AS `landRoadAddressName`,
+               (SELECT `building_info`.`building_name`
+                FROM `budong`.`building_info` AS `building_info`
+                WHERE `building_info`.`pnu` = `land_save`.`land_save_pnu`
+                LIMIT 1)            AS `landBuildingName`
+        FROM `budong`.`land_saves`          AS `land_save`
+        WHERE `user_email` = #{userEmail}
+        ORDER BY `created_at` DESC
+        LIMIT #{countPerPage} OFFSET #{offset}
+    </select>
+
+    <select id="selectLandSaveCountByPage"
+            resultType="_int"
+            parameterType="org.com.ljh.budong.dtos.LandDto">
+        SELECT COUNT(0)             AS `count`,
+               `land_save_pnu`      AS `landSavePnu`,
+               `user_email`         AS `userEmail`,
+               `created_at`         AS `createdAt`,
+               (SELECT `address_info`.`address_name`
+                FROM `budong`.`address_info` AS `address_info`
+                WHERE `address_info`.`pnu` = `land_save`.`land_save_pnu`
+                LIMIT 1)            AS `landAddressName`,
+               (SELECT `address_info`.`road_address_name`
+                FROM `budong`.`address_info` AS `address_info`
+                WHERE `address_info`.`pnu` = `land_save`.`land_save_pnu`
+                LIMIT 1)            AS `landRoadAddressName`,
+               (SELECT `building_info`.`building_name`
+                FROM `budong`.`building_info` AS `building_info`
+                WHERE `building_info`.`pnu` = `land_save`.`land_save_pnu`
+                LIMIT 1)            AS `landBuildingName`
+        FROM `budong`.`land_saves`          AS `land_save`
+        WHERE `user_email` = #{userEmail}
+        ORDER BY `created_at` DESC
+        LIMIT #{countPerPage} OFFSET #{offset}
+    </select>
+</mapper>
